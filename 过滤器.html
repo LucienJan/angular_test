@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html ng-app="demo">
+	<head>
+		<meta charset="UTF-8">
+		<title>my过滤器</title>
+	</head>
+	<body>
+		<div ng-controller="index1Ctrl">
+			<p test="{{arr | filter:id}}">姓名为:</p>
+			<input ng-model="search" />
+			<p ng-repeat="p in arr | filter:id">
+				{{p.skill + "," + p.eat}}
+			</p>
+			
+			<div ></div>
+		</div>
+	</body>
+	
+	<script src="js/angular.js"></script>
+	<script>
+		var app = angular.module("demo",[]);
+		app.controller("index1Ctrl",function($scope){
+			$scope.auther = "This page is written by LucienJan";
+			$scope.search = "";
+			$scope.arr = [{
+				id:LucienJan,
+				skill:Coding,
+				eat:egg
+			},{
+				id:CindyLa,
+				skill:Talks,
+				eat:ice cream
+			},{
+				id:LiLi,
+				skill:Excel,
+				eat:noodles
+			}];
+		});
+		app.directive("myfilter",function(){
+			return {
+				link:function(scope,ele,attr){
+					
+				}
+			}
+		});
+	</script>
+</html>

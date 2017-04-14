@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html ng-app="demo">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>my组件封装轮播图test</title>
+		<link rel="stylesheet" href="css/swiper.css" />
+	</head>
+
+	<body>
+		<div ng-controller="lucien">
+			<p>{{auther}}</p>
+			<mycarousel></mycarousel>
+			<mycarousel></mycarousel>
+		</div>
+	</body>
+
+	<script src="js/angular.js"></script>
+	<script src="js/swiper.js"></script>
+	<script>
+		var app = angular.module("demo",[]);
+		app.controller("lucien", function($scope) {
+			$scope.auther = "This page is written by LucienJan";
+		});
+		app.directive("mycarousel", function() {
+			return {
+				templateUrl: "directive/mycarousel_test.html",
+				link: function(scope, ele, attr) {
+					// 这里写轮播图实例逻辑
+					var swiper = new Swiper('.swiper-container', {
+						pagination: '.swiper-pagination',
+						nextButton: '.swiper-button-next',
+						prevButton: '.swiper-button-prev',
+						paginationClickable: true,
+						spaceBetween: 30,
+						centeredSlides: true,
+						autoplay: 2500,
+						autoplayDisableOnInteraction: false
+					});
+				}
+			}
+		});
+	</script>
+
+</html>

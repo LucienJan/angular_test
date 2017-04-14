@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html ng-app="demo">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>my过滤器实现分页</title>
+	</head>
+	<style>
+		ul,li{list-style: none;}
+	</style>
+
+	<body>
+		<div ng-controller="indexCtrl">
+			<p>{{auther}}</p>
+			<ul>
+				<!--第一个值就是一页显示多少条    第二个值就是第几页-->
+				<li ng-repeat="b in balls|limitTo:1:page">{{b.name}}{{b.price}}</li>
+			</ul>
+			<button ng-click="prev()">prev</button>
+			<button ng-click="pageTo(1)">1</button>
+			<button ng-click="pageTo(2)">2</button>
+			<button ng-click="pageTo(3)">3</button>
+			<button ng-click="pageTo(4)">4</button>
+			<button ng-click="pageTo(5)">5</button>
+			<button ng-click="pageTo(6)">6</button>
+			<button ng-click="next()">next</button>
+			<input ng-model="search" />
+			<ul>
+				<li ng-repeat="b in balls | filter:{price:search}">
+					name:{{b.name}} price:{{b.price}}
+				</li>
+			</ul>
+		</div>
+	</body>
+
+	<script src="js/angular.js"></script>
+	<script>
+		var app = angular.module("demo", []);
+		app.controller("indexCtrl", function($scope) {
+			$scope.page = 0;
+			$scope.search = '';
+			$scope.next = function() {
+				if($scope.page + 1 < $scope.balls.length) {
+					$scope.page += 1;
+				} else {
+					$scope.page;
+				}
+			};
+			$scope.prev = function() {
+				if($scope.page > 0) {
+					$scope.page -= 1;
+				} else {
+					$scope.page;
+				}
+			};
+			$scope.pageTo = function(num) {
+				$scope.page = num - 1;
+			};
+
+			$scope.auther = "This page is written by LucienJan";
+			$scope.balls = [{
+				name: "斯伯丁",
+				price: 999,
+				material: "cattlehide"
+			}, {
+				name: "摩腾",
+				price: 899,
+				material: "高级PVC+人工皮革"
+			}, {
+				name: "nike",
+				price: 599,
+				material: "高级PVC"
+			}, {
+				name: "Jordan",
+				price: 399,
+				material: "普通pageTo()PVC"
+			}, {
+				name: "火车头",
+				price: 199,
+				material: "天然橡胶"
+			}, {
+				name: "山寨货",
+				price: 50,
+				material: "人工橡胶"
+			}];
+		});
+	</script>
+
+</html>

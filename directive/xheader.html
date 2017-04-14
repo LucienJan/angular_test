@@ -1,0 +1,14 @@
+<!--这是组件的内容-->
+<div style="border:5px solid #f60;">
+	<p style="font-weight: bold;color:yellow;">{{txt}}</p>
+	<p>{{name}}</p>
+	<input ng-model="name" /><br />
+	<button ng-click="Click()">submit</button>
+	<p>{{num}}</p>
+	
+	
+	<div ng-show="num==1">状态一</div>
+	<div ng-show="num==2">状态二</div>
+	
+	<button ng-click="nba()">NBA</button>
+</div>

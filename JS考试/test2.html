@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>js考试第二题</title>
+</head>
+<body>
+	<a href="">a</a>
+	<a>b</a>
+	<a>c</a>
+	<a>d</a>
+	<a>e</a>
+	<a>f</a>
+</body>
+<script>
+	var link = document.getElementsByTagName('a')
+	for(var i=0 ; i<link.length ; i++){
+		link[i].onclick = function(){
+			return function(){
+				alert(i);
+			}(i)
+		}
+	}
+</script>
+</html>

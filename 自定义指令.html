@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app="demo">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>自定义指令test</title>
+	</head>
+
+	<body>
+		<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+		<div ng-controller="lucien">
+			<p>{{name}}</p>
+
+			<xtable></xtable>
+		</div>
+		<div ng-controller="hello">
+			<xtable></xtable>
+		</div>
+	</body>
+
+	<script src="js/angular.js"></script>
+	<script>
+		var app = angular.module("demo", []);
+		app.controller("lucien", function($scope) {
+			$scope.name = "written by lucienjan";
+			$scope.title = "what the fuck?!";
+		});
+		app.controller("hello", function($scope) {
+			$scope.title = "holly shit";
+		});
+		app.directive("xtable", function() {
+			return {
+				restrict: "ECMA",
+				replace: false,
+				templateUrl: "./directive/xtable.html",
+			}
+		})
+	</script>
+
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html ng-app="lucien">
+	<head>
+		<meta charset="UTF-8">
+		<title>ng-switch选项卡</title>
+		<style>
+			#box{width: 300px;margin:0 auto;}
+			#tab{
+				display: flex;
+			}
+			#tab div{
+				flex: 1;
+				height: 30px;
+				line-height: 30px;
+				text-align: center;
+				border-top: 1px solid #CCCCCC;
+				border-left:1px solid #ccc;
+				border-right: 1px solid #CCCCCC;
+			}
+			#tab div:hover{
+				cursor: pointer;
+				background-color: orange;
+			}
+			.content{
+				height: 200px;
+				line-height: 200px;
+				text-align: center;
+				/*font-size: {{size+'px'}};*/
+				font-family: "微软雅黑";
+				font-weight: bold;
+			}
+			.active{background-color: orange;}
+		</style>
+	</head>
+	<body>
+		<div ng-controller="mytab" id="box">
+			<div id="tab">
+				<div ng-click="show(1)" ng-class="{'active':page1}">一</div>
+				<div ng-click="show(2)" ng-class="{'active':page2}">二</div>
+				<div ng-click="show(3)" ng-class="{'active':page3}">三</div>
+			</div>
+			<div ng-switch="page">
+				<div style="font-size:{{size+'px'}};color:rgb({{r}},{{g}},{{b}})" class="content" ng-class="{'active':page=1}" ng-switch-when="1">篮球</div>
+				<div style="font-size:{{size+'px'}};color:rgb({{r}},{{g}},{{b}})" class="content" ng-class="{'active':page=2}" ng-switch-when="2">足球</div>
+				<div style="font-size:{{size+'px'}};color:rgb({{r}},{{g}},{{b}})" class="content" ng-class="{'active':page=3}" ng-switch-when="3">排球</div>
+			</div>
+			
+			 <!--放大缩小字体-->
+			缩放字体：<br/><input type="range" ng-model="size"/>
+			<span>{{size}}%</span><br />
+			<!--改变颜色-->
+			改变字体颜色：<br/><input type="range" ng-model="r" max="255"/>
+			<span>R:{{r}}</span><br />
+			<input type="range" min="0" max="255" ng-model="g"/>
+			<span>G:{{g}}</span><br />
+			<input type="range" min="0" max="255" ng-model="b"/>
+			<span>B:{{b}}</span>
+		</div>
+	</body>
+	
+	
+	<!--用ng-switch写选项卡-->
+	<script src="js/angular.js"></script>
+	<script>
+		var app = angular.module('lucien',[]);
+		app.controller('mytab',function($scope){
+			$scope.name = "lucien";
+			$scope.page = "2";
+			$scope.page1 = false;
+			$scope.page2 = true;
+			$scope.page3 = false;
+			$scope.show = function(choose){
+				$scope.page = choose;
+				switch(choose){
+					case 1: $scope.page1 = true;
+							$scope.page2 = false;
+							$scope.page3 = false; break;
+					case 2: $scope.page1 = false;
+							$scope.page2 = true;
+							$scope.page3 = false; break;
+					case 3: $scope.page1 = false; 
+							$scope.page2 = false; 
+							$scope.page3 = true; break;
+				}
+			};
+			
+			$scope.size = 12;
+			$scope.r = 0;
+			$scope.g = 0;
+			$scope.b = 0;
+		})
+	</script>
+</html>

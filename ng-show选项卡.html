@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html ng-app="lucien">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>我的选项卡</title>
+		<style>
+			#tab {
+				display: flex;
+				margin-bottom: 10px;
+			}
+			
+			#tab div {
+				flex: 1;
+				height: 20px;
+				line-height: 20px;
+				text-align: center;
+				cursor: pointer;
+			}
+			#tab div:first-child,#tab div:nth-child(2){
+				border-right:1px solid #ccc;
+			}
+			
+			
+			.page {
+				text-align: center;
+			}
+			
+			.active {
+				border-bottom: 1px solid orange;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--用ng-show写选项卡-->
+		<div ng-controller="mytab">
+			<div id="tab">
+				<div ng-click="show(1)" ng-class="{'active':page1}">1</div>
+				<div ng-click="show(2)" ng-class="{'active':page2}">2</div>
+				<div ng-click="show(3)" ng-class="{'active':page3}">3</div>
+			</div>
+			<div class="page" ng-show="page1">这是第一页</div>
+			<div class="page" ng-show="page2">这是第二页</div>
+			<div class="page" ng-show="page3">这是第三页</div>
+		</div>
+	</body>
+
+	<script src="js/angular.js"></script>
+	<script>
+		var app = angular.module("lucien",[]);
+		app.controller("mytab",function($scope){
+			$scope.name = "lucien";
+			$scope.page1 = true;
+			$scope.page2 = false;
+			$scope.page3 = false;
+			$scope.show = function(change){
+				if(change == 1){
+					$scope.page1 = true;
+					$scope.page2 = false;
+					$scope.page3 = false;
+				}else if(change == 2){
+					$scope.page1 = false;
+					$scope.page2 = true;
+					$scope.page3 = false;
+				}else{
+					$scope.page1 = false;
+					$scope.page2 = false;
+					$scope.page3 = true;
+				}
+			}
+		})
+	</script>
+
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="demo">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>test_angular</title>
+		<style>
+			.blue {
+				color: {
+					{
+						color
+					}
+				}
+				;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div ng-controller="aaa">
+			<p class="blue" ng-bind="name"></p>
+			<p>{{age + 8 + "这是字符串拼接"}}</p>
+			<p style="color:{{color}};">test</p>
+			<p>{{bool?(bool?"11" : "22") : "假"}}</p>
+			<button ng-model="Click">点击</button>
+			<input type="text" ng-model="inputText" />
+			<button ng-model="getText">打印输入框的东西</button>
+			<p ng-init="arr=[a,2,c]" ng-bind="arr[2]" ]></p>
+		</div>
+	</body>
+
+	<script src="./js/angular.js"></script>
+	<script>
+		// console.log(angular);
+		// 定义一个模块(第1个参数写模块名,第2个参数写依赖)
+		var app = angular.module("demo", []);
+		app.controller("aaa", function($scope) {
+			$scope.name = "laoyao";
+			$scope.age = 32;
+			$scope.color = "red";
+			$scope.bool = true;
+			$scope.Click = function($scope) {
+				$scope.bool = !$scope.bool;
+			};
+			$scope.inputText = "";
+			$scope.getText = function($scope) {
+				console.log($scope.inputText);
+			}
+		})
+	</script>
+
+</html>

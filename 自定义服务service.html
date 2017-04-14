@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html ng-app="demo">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>自定义服务service</title>
+	</head>
+
+	<body>
+		<div ng-controller="indexCtrl">
+			<p>{{auther}}</p>
+		</div>
+	</body>
+
+	<script src="js/angular.js"></script>
+	<script>
+		var app = angular.module("demo", []);
+		app.controller("indexCtrl", function($scope, tool1, tool2, cookie) {
+			$scope.auther = "This page is written by LucienJan";
+			console.log(tool1);
+			console.log(tool1.sum(3, 8));
+			console.log(tool2);
+			console.log(tool2.sum(10, 20));
+			console.log(tool2.minus(10, 32));
+			console.log(tool2.http);
+			tool2.http({
+				url: "get.php",
+				method: "GET",
+				parmas: { skill: "PS" }
+			}).then(function(data) {
+				console.log(data);
+			});
+
+			cookie.setCookie("name", "lucien");
+			console.log(cookie.getCookie("name"));
+		});
+
+		app.service("tool1", function() {
+			return {
+				sum: function(a, b) {
+					return a + b;
+				}
+			}
+		});
+
+		app.service("tool2", function(tool1, $http) {
+			return {
+				sum: tool1.sum,
+				minus: function(a, b) {
+					return a - b;
+				},
+				http: $http
+			}
+		});
+
+		app.service("cookie", function($document) {
+			return {
+				setCookie: function(name, value) {
+					var days = 10;
+					var ex = new Date();
+					ex.setTime(ex.getTime() + days * 24 * 60 * 60 * 1000);
+					$document[0].cookie = name + "=" + value + ";expires=" + ex;
+				},
+				getCookie: function(name) {
+					var a;
+					var reg = new RegExp("(^|)" + name + "=([^;]*)(;|$)");
+					if(a = $document[0].cookie.match(reg)) {
+						return a[2];
+					}
+				},
+			}
+		});
+	</script>
+
+</html>

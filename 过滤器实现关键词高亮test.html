@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="demo">
+	<head>
+		<meta charset="UTF-8">
+		<title>过滤器实现关键词高亮</title>
+	</head>
+	<body>
+		<div ng-controller="indexCtrl">
+			<p>{{auther}}</p>
+			<input ng-model="search" />
+			<p ng-bind-html="txt|matchword:search|safe"></p>
+		</div>
+	</body>
+	
+	<script src="js/angular.js"></script>
+	<script>
+		var app = angular.module("demo",[]);
+		app.controller("indexCtrl",function($scope){
+			$scope.auther = "This page is written by LucienJan";
+			$scope.txt = "Hit FM是中国国际广播电台旗下的国际流行音乐频率，2003年4月16日开始在北京试播。与中国传统的综合性电台不同，Hit FM采用国际上最成熟、最专业的类型化音乐电台（Pure Format Radio）操作模式，全天24小时滚动播出当今国际流行乐坛最动感、时尚的热门金曲，坚持推广高品质、国际化的流行音乐文化，致力打造动感、时尚、与国际接轨的品牌形象，力争成为都市时尚人群生活中不可或缺的音乐伴侣。";
+		});
+		app.filter("matchword",function(){
+			return function(input,value){
+				//console.log(input); // 获得整篇文章
+				//console.log(value); // 获得输入的文字
+				var arr = input.split(value); // 将输入的文字获取，存入变量中
+				//console.log(arr); // 该变量是一个数组
+				// 将获取的文字改变样式
+				var output = arr.join("<span style='background-color:orange;'>" + value + "</span>");
+				return output;
+			}
+		});
+		app.filter("safe",function($sce){
+			return function(input){
+				return $sce.trustAsHtml(input);
+			}
+		});
+	</script>
+</html>

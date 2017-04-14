@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html ng-app="demo">
+	<head>
+		<meta charset="UTF-8">
+		<title>my事件广播数据3</title>
+	</head>
+	<body>
+		<div ng-controller="father" style="border:2px solid orange">
+			<p>{{name}}</p>
+			<input ng-model="toChildContent" />
+			<button ng-click="forChild()">给儿子</button>
+			<input ng-model="toBortherContent" />
+			<button ng-click="forBorther()">给兄弟</button>
+			
+			<div ng-controller="child" style="border:1px solid blue">
+				<p>{{name}}</p>
+				<input ng-model="toFatherContent" />
+				<button ng-click="forFather()">给老爸</button>
+			</div>
+		</div>
+		<br />
+		<!--兄弟-->
+		<div ng-controller="brother" style="border:2px solid orange">
+			<p>{{name}}</p>
+		</div>
+	</body>
+	
+	<script src="js/angular.js"></script>
+	<script>
+		var app = angular.module("demo",[]);
+		// 父亲
+		app.controller("father",function($scope){
+			$scope.name = "父亲";
+			$scope.forChild = function(){
+				$scope.$broadcast('to-child', $scope.toChildContent);
+			};
+			$scope.forBorther = function(){
+				$scope.$emit('to-borther',$scope.toBortherContent);
+			};
+			$scope.$on("to-father",function(event,data){
+				console.log(data);
+			});
+		});
+		//儿子
+		app.controller("child",function($scope){
+			$scope.name= "儿子";
+			$scope.forFather = function(){
+				$scope.$emit('to-father',$scope.toFatherContent);
+			};
+			$scope.$on("to-child",function(event,data){
+				console.log(data);
+			});
+		});
+		// 兄弟
+		app.controller("brother",function($scope,$location,$rootScope){
+			$scope.name = "兄弟";
+			$rootScope.$on('to-borther',function(event,data){
+				console.log(data);
+			});
+		});
+	</script>
+</html>

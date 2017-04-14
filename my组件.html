@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html ng-app="demo">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div ng-controller="indexCtrl">
+			<p change-color>{{name}}</p>
+			<input ng-model="name"/>
+			<lucien data="1"></lucien>
+			<lucien data="2"></lucien>
+		</div>
+	</body>
+	
+	<script src="js/angular.js"></script>
+	<script src="js/jquery.js"></script>
+	<script>
+		var app = angular.module("demo",[]);
+		app.controller("indexCtrl",function($scope){
+			$scope.name = "This page is written by LucienJan";
+		});
+		app.directive("lucien",function(){
+			return {
+				templateUrl:"directive/xheader.html",
+				replace:false,
+				scope:{},
+				link:function(scope,ele,attr){
+					scope.name = "不加scope:{}name跟着改变";
+					scope.txt = "这是第一个组件";
+					scope.Click = function(){
+						console.log("what the fuck?!");
+					}
+					ele.find('p').css('background-color','skyblue');
+					scope.num = attr.data;
+				}
+			}
+		});
+		app.directive("changeColor",function(){
+			return {
+				link:function(scope,ele,attr){
+					// ele.css('background-color',"orange");
+					$(ele).css('background-color','pink');
+				}
+			}
+		});
+	</script>
+</html>
