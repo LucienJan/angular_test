@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="demo">
+	<head>
+		<meta charset="UTF-8">
+		<title>ng-switch选项卡优化</title>
+	</head>
+	<style>
+		
+	</style>
+	<body>
+		<div ng-controller="index1Ctrl">
+			<div id="header">
+				<div ng-click="show(idx)" ng-repeat="h in arr">{{h}}</div>
+				<!--<div ng-click="show(1)" ng-class="{'active':page1}">一</div>
+				<div ng-click="show(2)" ng-class="{'active':page2}">二</div>
+				<div ng-click="show(3)" ng-class="{'active':page3}">三</div>-->
+			</div>
+			<div id="content" ng-switch="idx">
+				<div class="content" ng-switch-when="1">Cindyla</div>
+				<div class="content" ng-switch-when="2">FanfanDu</div>
+				<div class="content" ng-switch-when="3">zengyanhuan</div>
+			</div>
+		</div>
+	</body>
+	
+	<script src="js/angular.js"></script>
+	<script>
+		var app = angular.module("demo",[]);
+		
+		app.controller("index1Ctrl",function($scope){
+			$scope.auther = "This page is written by LucienJan";
+			$scope.arr = ["page1","page2","page3"];
+			$scope.idx = 1;
+			$scope.show = function(idx){
+				
+			};
+		});
+	</script>
+</html>
