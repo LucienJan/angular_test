@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html ng-app="demo">
+	<head>
+		<meta charset="UTF-8">
+		<title>路由模拟选项卡_test2</title>
+	</head>
+	<body>
+		<a href="#!/home">主页</a>
+		<a href="#!/news">新闻</a>
+		<a href="#!/physics">体育</a>
+		<div ng-view=""></div>
+	</body>
+	<script src="../js/angular.js"></script>
+	<script src="../js/angular-route.js"></script>
+	<script>
+		var app = angular.module("demo",[ngRoute]);
+		app.config(function($routePorvider){
+			$routeProvider.otherwise({
+				redirectTo:"/home"
+			}).when("/home",{
+				templateUrl:"template/home.html",
+				controller:"homeCtrl"
+			}).when("/news",{
+				templateUrl:"template/news.html",
+				controller:"newsCtrl"
+			}).when("/physics",{
+				templateUrl:"template/physics.html",
+				controller:"physicsCtrl"
+			})
+		});
+		app.controller("homeCtrl",function($scope){
+			
+		});
+		app.controller("newsCtrl",function($scope){
+			
+		});
+		app.controller("physicsCtrl",function($scope){
+			
+		});
+		app.directive("xheader",function(){
+			return {
+				template:"<p>hahahaha</p?>"
+			}
+		})
+	</script>
+</html>

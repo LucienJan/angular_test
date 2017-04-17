@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html ng-app="demo">
+	<head>
+		<meta charset="UTF-8">
+		<title>路由模拟选项卡_mytest</title>
+	</head>
+	<body>
+		<a href="#!/home">主页</a>
+		<a href="#!/news">新闻</a>
+		<a href="#!/physics">体育</a>
+		<div ng-view=""></div>
+	</body>
+	<script src="../js/angular.js"></script>
+	<script src="../js/angular-route.js"></script>
+	<script>
+		var app = angular.module("demo",["ngRoute"]);
+		app.config(function($routeProvider){
+			$routeProvider.when("/home",{
+				templateUrl:"template/home.html",
+				controller:"homeCtrl"
+			}).when("/news",{
+				templateUrl:"template/news.html",
+				controller:"newsCtrl"
+			}).when("/physics",{
+				templateUrl:"template/physics.html",
+				controller:"physicsCtrl"
+			}).otherwise({
+				redirectTo:"/home"
+			})
+		});
+		app.controller("homeCtrl",function($scope){
+			$scope.auther = "This page is written by LucienJan";
+		});
+		app.controller("newsCtrl",function($scope){
+			$scope.nba = "NBA季后赛今日开赛!!!";
+		});
+		app.controller("physicsCtrl",function($scope){
+			$scope.kobe = "科比今天退役！";
+		});
+	</script>
+</html>
