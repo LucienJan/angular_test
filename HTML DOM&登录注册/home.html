@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html ng-app="demo">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body ng-controller="homeCtrl">
+		<div ng-show="islogin">
+			<p>成功登录</p>
+			<button ng-click="logout()" ng-bind="'logout'"></button>
+		</div>
+	</body>
+	
+	<script src="../js/angular.js"></script>
+	<script src="js/ng-cookie.js"></script>
+	<script>
+		var app = angular.module("demo",['MyModule','ngCookie']);
+		app.controller("homeCtrl",function($scope,$http,$cookieStore,$window){
+			
+		})
+	</script>
+</html>

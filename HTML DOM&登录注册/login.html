@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html ng-app="demo">
+	<head>
+		<meta charset="UTF-8">
+		<title>mylogin</title>
+	</head>
+	<body ng-controller="indexCtrl">
+		<input type="text" ng-module="username"/>
+		<input type="password" ng-module="password"/>
+		<p ng-module=""></p>
+		<button ng-click="login()" ng-disabled="!(username && password)">登录</button>
+		<button ng-click="register()" ng-disabled="!(username && password)">注册</button>
+	</body>
+	
+	<script src="../js/angular.js"></script>
+	<script src="js/ng-cookie.js"></script>
+	<script>
+		var app = angular.module("demo",[ngCookies]);
+		app.controller("indexCtrl",function($scope,$http,$cookiestore,$window){
+			$scope.auther = "This page is written by LucienJan";
+			$scope.username = '';
+			$scope.password = '';
+			$scope.login = function(){
+				
+			};
+			$scope.register = function(){
+				
+			};
+		});
+	</script>
+</html>

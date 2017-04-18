@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<!--参考自：http://blog.csdn.net/super_yang_android/article/details/51585689-->
+<html ng-app="exampleApp">
+	<head>
+		<meta charset="UTF-8">
+		<title>我的模块化实例</title>
+	</head>
+	<body>
+		<div ng-controller="mycontrol">
+		<!--ng-controller的名称在exampleController.js中定义，其他组件服务之类的同理-->
+			<div>
+				<p>Angular模块化</p>
+			</div>
+		</div>
+	</body>
+	
+	<script src="js/angular.js"></script>
+	<script src="controllers/exampleController.js"></script>
+	<script src="directives/exampleDirective.js"></script>
+	<script src="filters/exampleFilter.js"></script>
+	<script src="services/exampleService.js"></script>
+	
+	<script>
+		var app = angular.module("exampleApp",['exampleApp.Controllers','exampleApp.Directives','exampleApp.Filters','exampleApp.Services']);
+	</script>
+</html>
